@@ -1,0 +1,16 @@
+asn1crypto==0.24.0
+croniter==0.3.30
+#cryptography==2.1.4
+idna==2.6
+keyring==10.6.0
+keyrings.alt==3.0
+mysqlclient==1.4.6
+pycrypto==2.6.1
+#pygobject==3.27.0
+python-crontab==2.4.0
+python-dateutil==2.8.1
+pyxdg==0.25
+SecretStorage==2.3.1
+selenium==3.141.0
+six==1.13.0
+urllib3==1.25.3
