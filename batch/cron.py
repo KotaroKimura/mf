@@ -2,11 +2,11 @@
 from crontab import CronTab
 
 if __name__ == '__main__':
-    cron = CronTab()
-    job  = cron.new(command="python3 mf.py")
+    _cron = CronTab()
+    _job  = _cron.new(command="python3 mf.py")
 
-    job.setall("0 1 * * *")
-    cron.write("./crontab")
+    _job.setall("0 1 * * *")
+    _cron.write("./crontab")
 
-    for result in cron.run_scheduler():
-        print(result)
+    for _result in _cron.run_scheduler():
+        print(_result)

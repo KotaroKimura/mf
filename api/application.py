@@ -4,7 +4,7 @@ from handlers.home_handler import HomeHandler
 from mysql import ConnectionPool
 from config import SETTINGS
 
-pool = ConnectionPool(
+_pool = ConnectionPool(
     host=SETTINGS['mysql']['host'],
     db=SETTINGS['mysql']['db'],
     user=SETTINGS['mysql']['user'],
@@ -14,7 +14,7 @@ pool = ConnectionPool(
 )
 
 _urls = {
-    '/': HomeHandler(pool)
+    '/': HomeHandler(_pool)
 }
 
 application = WSGIApplication(

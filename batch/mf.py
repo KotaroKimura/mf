@@ -6,17 +6,17 @@ import mysql
 from config import SETTINGS
 
 if __name__ == '__main__':
-    user     = SETTINGS['mf']['id']
-    password = SETTINGS['mf']['passwd']
-    driver   = utils.login(user, password)
-    _list    = utils.dc_pension_list(driver)
+    _user     = SETTINGS['mf']['id']
+    _password = SETTINGS['mf']['passwd']
+    _driver   = utils.login(_user, _password)
+    _list     = utils.dc_pension_list(_driver)
 
-    mysql_host     = SETTINGS['mysql']['host']
-    mysql_db       = SETTINGS['mysql']['db']
-    mysql_user     = SETTINGS['mysql']['user']
-    mysql_password = SETTINGS['mysql']['passwd']
-    con            = mysql.con(mysql_host, mysql_db, mysql_user, mysql_password)
-    mysql.insert_dc_pension_list(con, _list)
+    _mysql_host     = SETTINGS['mysql']['host']
+    _mysql_db       = SETTINGS['mysql']['db']
+    _mysql_user     = SETTINGS['mysql']['user']
+    _mysql_password = SETTINGS['mysql']['passwd']
+    _con            = mysql.con(_mysql_host, _mysql_db, _mysql_user, _mysql_password)
+    mysql.insert_dc_pension_list(_con, _list)
 
-    driver.quit()
+    _driver.quit()
     sys.exit()

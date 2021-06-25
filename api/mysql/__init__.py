@@ -22,9 +22,9 @@ class ConnectionPool(object):
             print(query)
             return None
         else:
-            cursor = self.__pool.cursor()
-            cursor.execute(query)
-            return cursor
+            _cursor = self.__pool.cursor()
+            _cursor.execute(query)
+            return _cursor
 
     def close_cursor(self, cursor):
         cursor.close()

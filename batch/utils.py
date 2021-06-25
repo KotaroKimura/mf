@@ -5,53 +5,53 @@ from time import sleep
 import os
 
 def login(user, password):
-    surl = "https://moneyforward.com/sign_in"
+    _surl = "https://moneyforward.com/sign_in"
 
-    options = Options()
-    options.add_argument('-headless')
-    driver = webdriver.Firefox(executable_path="/bin/geckodriver", log_path=os.path.devnull, firefox_options=options)
+    _options = Options()
+    _options.add_argument('-headless')
+    _driver = webdriver.Firefox(executable_path="/bin/geckodriver", log_path=os.path.devnull, firefox_options=_options)
 
-    driver.implicitly_wait(10)
-    driver.get(surl)
+    _driver.implicitly_wait(10)
+    _driver.get(_surl)
 
     # login
-    elem = driver.find_element_by_css_selector("._2sZu7ciR.ssoText")
-    elem.click()
-    elem = driver.find_element_by_css_selector("._2mGdHllU.inputItem")
-    elem.clear()
-    elem.send_keys(user)
+    _elem = _driver.find_element_by_css_selector("._2sZu7ciR.ssoText")
+    _elem.click()
+    _elem = _driver.find_element_by_css_selector("._2mGdHllU.inputItem")
+    _elem.clear()
+    _elem.send_keys(user)
 
-    elem = driver.find_element_by_css_selector(".zNNfb322.submitBtn.homeDomain")
-    elem.click()
-    elem = driver.find_element_by_css_selector("._1vBc2gjI.inputItem")
+    _elem = _driver.find_element_by_css_selector(".zNNfb322.submitBtn.homeDomain")
+    _elem.click()
+    _elem = _driver.find_element_by_css_selector("._1vBc2gjI.inputItem")
 
-    elem.clear()
-    elem.send_keys(password)
-    elem = driver.find_element_by_css_selector(".zNNfb322.submitBtn.homeDomain")
-    elem.click()
+    _elem.clear()
+    _elem.send_keys(password)
+    _elem = _driver.find_element_by_css_selector(".zNNfb322.submitBtn.homeDomain")
+    _elem.click()
     sleep(3)
 
-    return driver
+    return _driver
 
 def dc_pension_list(driver):
-    result = []
+    _result = []
     driver.get("https://moneyforward.com/bs/portfolio")
 
-    portfolio_section = driver.find_elements_by_css_selector(".table.table-bordered.table-pns")[0]
-    theader = portfolio_section.find_element_by_tag_name("thead").find_elements_by_tag_name("th")
-    tbody   = portfolio_section.find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")
-    header  = [t.text for t in theader]
+    _portfolio_section = driver.find_elements_by_css_selector(".table.table-bordered.table-pns")[0]
+    _theader = _portfolio_section.find_element_by_tag_name("thead").find_elements_by_tag_name("th")
+    _tbody   = _portfolio_section.find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")
+    _header  = [t.text for t in _theader]
 
-    for item in [ { header[i]: content.text for i, content in enumerate(t.find_elements_by_tag_name("td"))} for t in tbody]:
-        if not item['名称'] in ['国民年金', '厚生年金(一般)', '厚生年金(公務員)', '厚生年金(私学共済)']:
-            brand_info = []
+    for _item in [ { _header[_i]: _content.text for _i, _content in enumerate(_t.find_elements_by_tag_name("td"))} for _t in _tbody]:
+        if not _item['名称'] in ['国民年金', '厚生年金(一般)', '厚生年金(公務員)', '厚生年金(私学共済)']:
+            _brand_info = []
 
-            brand_info.append(item['名称'])
-            brand_info.append(int(item['取得価額'].replace(",", "").replace("円", "")))
-            brand_info.append(int(item['現在価値'].replace(",", "").replace("円", "")))
-            brand_info.append(int(item['評価損益'].replace(",", "").replace("円", "")))
-            brand_info.append(float(item['評価損益率'].replace("%", "")))
+            _brand_info.append(_item['名称'])
+            _brand_info.append(int(_item['取得価額'].replace(",", "").replace("円", "")))
+            _brand_info.append(int(_item['現在価値'].replace(",", "").replace("円", "")))
+            _brand_info.append(int(_item['評価損益'].replace(",", "").replace("円", "")))
+            _brand_info.append(float(_item['評価損益率'].replace("%", "")))
 
-            result.append(brand_info)
+            _result.append(_brand_info)
 
-    return result
+    return _result

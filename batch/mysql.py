@@ -12,12 +12,12 @@ def con(host, db, user, passwd):
         cursorclass=MySQLdb.cursors.DictCursor
     )
 
-def insert_dc_pension_list(con, _list):
-    values_list = []
-    cursor      = con.cursor()
+def insert_dc_pension_list(con, pension_list):
+    _values_list = []
+    _cursor      = con.cursor()
 
-    for item in _list:
-        cursor.execute('''
+    for _item in pension_list:
+        _cursor.execute('''
             SELECT
                 id
             FROM
@@ -27,19 +27,19 @@ def insert_dc_pension_list(con, _list):
             LIMIT
                 1
             ;
-        '''.format(item[0]))
+        '''.format(_item[0]))
 
-        _row = cursor.fetchone()
+        _row = _cursor.fetchone()
         _id  = _row['id']
 
-        value_list = []
-        value_list.append(_id)
-        value_list.append(item[1])
-        value_list.append(item[2])
-        value_list.append(item[3])
-        value_list.append(item[4])
+        _value_list = []
+        _value_list.append(_id)
+        _value_list.append(_item[1])
+        _value_list.append(_item[2])
+        _value_list.append(_item[3])
+        _value_list.append(_item[4])
 
-        values_list.append(value_list)
+        _values_list.append(_value_list)
 
     _query = """
         INSERT INTO dc_cost (
@@ -60,5 +60,5 @@ def insert_dc_pension_list(con, _list):
         );
     """.format(datetime.now().strftime('%Y-%m-%d'))
 
-    cursor.executemany(_query, values_list)
+    _cursor.executemany(_query, _values_list)
     con.commit()
