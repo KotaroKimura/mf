@@ -53,7 +53,7 @@ class HomeClass(BaseClass):
             WHERE
                 d_c.date BETWEEN '{}' AND '{}'
             ORDER BY
-                d.id ASC,
+                d_c.dc_id ASC,
                 d_c.date ASC
             ;
         '''.format(
