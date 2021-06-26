@@ -47,10 +47,10 @@ def dc_pension_list(driver):
             _brand_info = []
 
             _brand_info.append(_item['名称'])
-            _brand_info.append(int(_item['取得価額'].replace(",", "").replace("円", "")))
-            _brand_info.append(int(_item['現在価値'].replace(",", "").replace("円", "")))
-            _brand_info.append(int(_item['評価損益'].replace(",", "").replace("円", "")))
-            _brand_info.append(float(_item['評価損益率'].replace("%", "")))
+            _brand_info.append(int(_item['取得価額'].replace(",", "").replace("円", "") or "0"))
+            _brand_info.append(int(_item['現在価値'].replace(",", "").replace("円", "") or "0"))
+            _brand_info.append(int(_item['評価損益'].replace(",", "").replace("円", "") or "0"))
+            _brand_info.append(float(_item['評価損益率'].replace("%", "") or "0"))
 
             _result.append(_brand_info)
 
