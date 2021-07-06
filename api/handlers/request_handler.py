@@ -1,3 +1,4 @@
+import traceback
 from urllib.parse import parse_qs
 
 HTTP_STATUS = {
@@ -45,7 +46,7 @@ class RequestHandler(object):
     def get(self, *args, **kwargs):
         return "405 Method Not Allowed"
 
-    def entry(self, environ, start_response):
+    def entry(self, environ, start_response, logger=None):
         self.__environ = environ
         _http_method   = environ['REQUEST_METHOD']
 
@@ -62,6 +63,9 @@ class RequestHandler(object):
         except Exception as e:
             self.status_code = 500
             _contents = HTTP_STATUS[500]
+
+            if logger:
+                logger.error(traceback.format_exc())
 
         _bcontent = bytes(_contents, encoding='UTF-8')
         _headers  = [

@@ -1,3 +1,5 @@
+from logging import StreamHandler, getLogger, DEBUG
+
 from wsgi.application import WSGIApplication
 from handlers.home_handler import HomeHandler
 
@@ -13,10 +15,19 @@ _pool = ConnectionPool(
     env=SETTINGS['env']
 )
 
+_logger = getLogger('mf_api')
+_logger.setLevel(DEBUG)
+
+_handler = StreamHandler()
+_handler.setLevel(DEBUG)
+
+_logger.addHandler(_handler)
+
 _urls = {
     '/': HomeHandler(_pool)
 }
 
 application = WSGIApplication(
-    _urls
+    _urls,
+    _logger
 )
