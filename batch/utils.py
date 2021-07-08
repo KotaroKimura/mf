@@ -33,6 +33,14 @@ def login(user, password):
 
     return _driver
 
+def sync_finance_info(driver):
+    driver.get("https://moneyforward.com/accounts")
+
+    _elem = driver.find_element_by_css_selector(".aggregation-queue-all")
+    _elem.click()
+
+    sleep(60 * 3)
+
 def dc_pension_list(driver):
     _result = []
     driver.get("https://moneyforward.com/bs/portfolio")

@@ -10,6 +10,7 @@ if __name__ == '__main__':
     _password = SETTINGS['mf']['passwd']
     _driver   = utils.login(_user, _password)
     _list     = utils.dc_pension_list(_driver)
+    utils.sync_finance_info(_driver)
 
     _mysql_host     = SETTINGS['mysql']['host']
     _mysql_db       = SETTINGS['mysql']['db']

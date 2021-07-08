@@ -14,7 +14,7 @@ RUN curl -L "https://github.com/mozilla/geckodriver/releases/download/v0.23.0/ge
 RUN echo "ja_JP UTF-8" > /etc/locale.gen && locale-gen
 
 ENV LANG ja_JP.UTF-8
-ENV TZ Asia/Tokyo
+#ENV TZ Asia/Tokyo
 
 ADD . /src/
 WORKDIR /src

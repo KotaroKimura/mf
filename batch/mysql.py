@@ -1,6 +1,6 @@
 import MySQLdb
 import MySQLdb.cursors
-from datetime import datetime
+import datetime
 
 def con(host, db, user, passwd):
     return MySQLdb.connect(
@@ -58,7 +58,7 @@ def insert_dc_pension_list(con, pension_list):
             %s,
             '{}'
         );
-    """.format(datetime.now().strftime('%Y-%m-%d'))
+    """.format(datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d'))
 
     _cursor.executemany(_query, _values_list)
     con.commit()

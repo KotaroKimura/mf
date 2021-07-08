@@ -5,7 +5,7 @@ if __name__ == '__main__':
     _cron = CronTab()
     _job  = _cron.new(command="python3 mf.py")
 
-    _job.setall("0 1 * * *")
+    _job.setall("0 22 * * *")
     _cron.write("./crontab")
 
     for _result in _cron.run_scheduler():
