@@ -14,6 +14,7 @@ class ConnectionPool(object):
                 charset='utf8',
                 cursorclass=MySQLdb.cursors.DictCursor
             )
+            self.__pool.ping(True)
         else:
             self.__pool = None
 

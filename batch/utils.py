@@ -40,6 +40,9 @@ def sync_finance_info(driver):
     _elem.click()
 
     sleep(60 * 3)
+    driver.refresh()
+
+    return driver
 
 def dc_pension_list(driver):
     _result = []
