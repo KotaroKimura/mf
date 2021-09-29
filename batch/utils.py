@@ -15,19 +15,19 @@ def login(user, password):
     _driver.get(_surl)
 
     # login
-    _elem = _driver.find_element_by_css_selector("._2sZu7ciR.ssoText")
+    _elem = _driver.find_element_by_css_selector("._3zOGWj-5.ssoText")
     _elem.click()
-    _elem = _driver.find_element_by_css_selector("._2mGdHllU.inputItem")
+    _elem = _driver.find_element_by_css_selector("._3RA2JEwp.inputItem")
     _elem.clear()
     _elem.send_keys(user)
 
-    _elem = _driver.find_element_by_css_selector(".zNNfb322.submitBtn.homeDomain")
+    _elem = _driver.find_element_by_css_selector("._3ZRZ5sbE.submitBtn.homeDomain")
     _elem.click()
-    _elem = _driver.find_element_by_css_selector("._1vBc2gjI.inputItem")
+    _elem = _driver.find_element_by_css_selector("._1NxPqTKD.inputItem")
 
     _elem.clear()
     _elem.send_keys(password)
-    _elem = _driver.find_element_by_css_selector(".zNNfb322.submitBtn.homeDomain")
+    _elem = _driver.find_element_by_css_selector("._3ZRZ5sbE.submitBtn.homeDomain")
     _elem.click()
     sleep(3)
 
