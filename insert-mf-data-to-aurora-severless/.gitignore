@@ -1,0 +1,4 @@
+.aws-sam
+layer/chrome/chromedriver
+layer/chrome/headless-chromium
+layer/python/lib
