@@ -11,3 +11,6 @@ def execute(db_cluster_arn, db_credentials_secrets_store_arn, sql):
     )
 
     return response
+
+def bad_request_exception_class():
+    return rds_client.exceptions.BadRequestException

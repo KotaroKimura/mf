@@ -1,5 +1,6 @@
 import json
 import datetime
+from time import sleep
 
 import chromium
 import parameter
@@ -11,10 +12,14 @@ def lambda_handler(event, context):
     params = parameter.get(event)
 
     print('TOUCH AURORA SERVERLESS')
-    aurora_serverless.execute(
-        params['mf-db-cluster-arn'],
-        params['mf-db-credentials-secrets-store-arn'],
-        'SELECT 1;')
+    try:
+        aurora_serverless.execute(
+            params['mf-db-cluster-arn'],
+            params['mf-db-credentials-secrets-store-arn'],
+            'SELECT 1;')
+    except aurora_serverless.bad_request_exception_class() as e:
+        print('catch BadRequestException:', e)
+        sleep(60)
 
     print('GET PENSION DATA FROM MF')
     driver       = chromium.login(params['mf-email'], params['mf-password'])
