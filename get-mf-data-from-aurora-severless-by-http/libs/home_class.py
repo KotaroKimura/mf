@@ -67,8 +67,6 @@ class HomeClass(BaseClass):
             self.db_params.get('mf-db-credentials-secrets-store-arn', None),
             sql)
 
-        self.__status_code = 200
-        
         labels = []
         for metadata in response['columnMetadata']:
             labels.append(metadata['label'])
@@ -85,11 +83,42 @@ class HomeClass(BaseClass):
         for tmp in results_tmp:
             date_key = tmp['d']
             if results.get(date_key) is None:
-                results[date_key] = []
+                results[date_key] = {'pension': [], 'news': []}
 
             del(tmp['d'])
-            results[date_key].append(tmp)
+            results[date_key]['pension'].append(tmp)
 
+        sql = '''
+            SELECT
+                rank,
+                article_title,
+                article_url,
+                date
+            FROM
+                nikkei_access_ranking
+            WHERE
+                date BETWEEN '{}' AND '{}'
+            ;
+        '''.format(
+            s_d.strftime('%Y-%m-%d'),
+            e_d.strftime('%Y-%m-%d'))
+
+        response = aurora_serverless.execute(
+            self.db_params.get('mf-db-cluster-arn', None),
+            self.db_params.get('mf-db-credentials-secrets-store-arn', None),
+            sql)
+
+        for record in response['records']:
+            tmp = []
+            for data in record:
+                tmp.append(list(data.values())[0])
+
+            date_key = tmp[3]
+            tmp.pop(3)
+
+            results[date_key]['news'].append(tmp)
+
+        self.__status_code = 200
         self.__response = {
             'result': results,
         }
