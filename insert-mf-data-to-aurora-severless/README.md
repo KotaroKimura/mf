@@ -11,3 +11,9 @@ https://github.com/adieuadieu/serverless-chrome/releases/download/v1.0.0-55/stab
 [layer/python(selenium)]
 pip3 install -t ./python/lib/python3.6/site-packages selenium==3.141.0
 ```
+
+# invoke on local
+``` bash
+sam build
+sam local invoke
+```
