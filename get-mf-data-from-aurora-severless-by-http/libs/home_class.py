@@ -73,13 +73,22 @@ class HomeClass(BaseClass):
         for metadata in response['columnMetadata']:
             labels.append(metadata['label'])
 
-        results = []
+        results_tmp = []
         for record in response['records']:
-            result = {}
+            tmp = {}
             for i, data in enumerate(record):
-                result[labels[i]] = list(data.values())[0]
+                tmp[labels[i]] = list(data.values())[0]
 
-            results.append(result)
+            results_tmp.append(tmp)
+
+        results = {}
+        for tmp in results_tmp:
+            date_key = tmp['d']
+            if results.get(date_key) is None:
+                results[date_key] = []
+
+            del(tmp['d'])
+            results[date_key].append(tmp)
 
         self.__response = {
             'result': results,
