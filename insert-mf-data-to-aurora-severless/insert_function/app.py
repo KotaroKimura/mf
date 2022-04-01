@@ -4,6 +4,7 @@ from time import sleep
 
 import parameter
 import mf_scraping
+import nikkei_scraping
 import aurora_serverless
 
 def lambda_handler(event, context):
@@ -75,6 +76,33 @@ def lambda_handler(event, context):
             ;
         '''.format(', '.join(values_list))
         )
+
+    print('GET NIKKEI ACCESS RANKING')
+    ranking = nikkei_scraping.get_access_ranking()
+
+    print('INSERT NIKKEI ACCESS RANKING TO AURORA SERVERLESS')
+    values_list = []
+    for r in ranking:
+        values_list.append(
+            '({}, {}, {}, "{}")'.format(
+                r[0],
+                r[1],
+                r[2],
+                formated_date))
+
+    response = aurora_serverless.execute(
+        params['mf-db-cluster-arn'],
+        params['mf-db-credentials-secrets-store-arn'],
+        '''
+            INSERT INTO nikkei_access_ranking (
+                rank,
+                article_title,
+                article_url,
+                date
+            )
+            VALUES {}
+            ;
+        '''.format(', '.join(values_list)))
 
     print('FINISH EVENT')
     return {
