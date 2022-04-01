@@ -84,7 +84,7 @@ def lambda_handler(event, context):
     values_list = []
     for r in ranking:
         values_list.append(
-            '({}, {}, {}, "{}")'.format(
+            '({}, "{}", "{}", "{}")'.format(
                 r[0],
                 r[1],
                 r[2],
