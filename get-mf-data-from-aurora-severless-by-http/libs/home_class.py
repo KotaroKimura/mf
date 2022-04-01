@@ -116,7 +116,8 @@ class HomeClass(BaseClass):
             date_key = tmp[3]
             tmp.pop(3)
 
-            results[date_key]['nikkei-access-ranking'].append(tmp)
+            if results.get(date_key) is not None:
+                results[date_key]['nikkei-access-ranking'].append(tmp)
 
         self.__status_code = 200
         self.__response = {
