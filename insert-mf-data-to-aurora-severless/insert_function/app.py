@@ -30,7 +30,8 @@ def lambda_handler(event, context):
     driver.quit()
 
     print('INSERT PENSION DATA TO AURORA SERVERLESS')
-    values_list = []
+    values_list   = []
+    formated_date = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d')
     for i in pension_list:
         response = aurora_serverless.execute(
             params['mf-db-cluster-arn'],
@@ -56,7 +57,7 @@ def lambda_handler(event, context):
                 i[2],
                 i[3],
                 i[4],
-                datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).strftime('%Y-%m-%d')))
+                formated_date))
 
     response = aurora_serverless.execute(
         params['mf-db-cluster-arn'],
