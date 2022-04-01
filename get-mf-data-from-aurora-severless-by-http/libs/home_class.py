@@ -83,7 +83,7 @@ class HomeClass(BaseClass):
         for tmp in results_tmp:
             date_key = tmp['d']
             if results.get(date_key) is None:
-                results[date_key] = {'pension': [], 'news': []}
+                results[date_key] = {'pension': [], 'nikkei-access-ranking': []}
 
             del(tmp['d'])
             results[date_key]['pension'].append(tmp)
@@ -116,7 +116,7 @@ class HomeClass(BaseClass):
             date_key = tmp[3]
             tmp.pop(3)
 
-            results[date_key]['news'].append(tmp)
+            results[date_key]['nikkei-access-ranking'].append(tmp)
 
         self.__status_code = 200
         self.__response = {
