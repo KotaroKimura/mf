@@ -2,8 +2,8 @@ import json
 import datetime
 from time import sleep
 
-import chromium
 import parameter
+import mf_scraping
 import aurora_serverless
 
 def lambda_handler(event, context):
@@ -22,9 +22,9 @@ def lambda_handler(event, context):
         sleep(60)
 
     print('GET PENSION DATA FROM MF')
-    driver       = chromium.login(params['mf-email'], params['mf-password'])
-    driver       = chromium.sync_finance_info(driver)
-    pension_list = chromium.dc_pension_list(driver)
+    driver       = mf_scraping.login(params['mf-email'], params['mf-password'])
+    driver       = mf_scraping.sync_finance_info(driver)
+    pension_list = mf_scraping.dc_pension_list(driver)
 
     driver.close()
     driver.quit()
