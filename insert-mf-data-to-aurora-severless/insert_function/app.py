@@ -49,7 +49,7 @@ def lambda_handler(event, context):
                 ;
             '''.format(i[0])
             )
-            
+
         id = response['records'][0][0]['longValue']
         values_list.append(
             '({}, {}, {}, {}, {}, "{}")'.format(
@@ -59,6 +59,14 @@ def lambda_handler(event, context):
                 i[3],
                 i[4],
                 formated_date))
+
+    if len(values_list) == 0:
+        return {
+            "statusCode": 400,
+            "body": json.dumps({
+                "message": "pension data is empty.",
+            }),
+        }
 
     response = aurora_serverless.execute(
         params['mf-db-cluster-arn'],
