@@ -31,7 +31,7 @@ def login(email, password):
     elem_loginMethod.send_keys(email)
 
     elem_login = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/div[4]/input')
+        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/div[3]/input')
     elem_login.click()
     sleep(3)
 
