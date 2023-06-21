@@ -36,7 +36,7 @@ def login(email, password):
     sleep(3)
 
     elem_password = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/input[2]')
+        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/div[2]/input')
     elem_password.send_keys(password)
 
     elem_login = driver.find_element_by_xpath(
@@ -45,7 +45,7 @@ def login(email, password):
     sleep(3)
 
     elem_auth = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div/div[1]/div/ul/li[3]/a')
+        '/html/body/main/div/div[2]/div/div[1]/div/ul/li[3]/a')
     elem_auth.click()
     sleep(3)
 
@@ -64,7 +64,7 @@ def sync_finance_info(driver):
     elem = driver.find_element_by_css_selector(".aggregation-queue-all")
     elem.click()
 
-    sleep(60 * 2)
+    sleep(60 * 8)
     driver.refresh()
 
     return driver
