@@ -27,20 +27,20 @@ def login(email, password):
     driver.get(URL)
 
     elem_loginMethod = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/input')
+        '/html/body/main/div/div[2]/div/div/div[1]/section/form/div[2]/div/input')
     elem_loginMethod.send_keys(email)
 
     elem_login = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/div[3]/input')
+        '/html/body/main/div/div[2]/div/div/div[1]/section/form/div[2]/div/div[3]/button')
     elem_login.click()
     sleep(3)
 
     elem_password = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/div[2]/input')
+        '/html/body/main/div/div[2]/div/div/div[1]/section/form/div[2]/div/div[2]/input')
     elem_password.send_keys(password)
 
     elem_login = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/div[3]/input')
+        '/html/body/main/div/div[2]/div/div/div[1]/section/form/div[2]/div/div[3]/button')
     elem_login.click()
     sleep(3)
 
@@ -50,7 +50,7 @@ def login(email, password):
     sleep(3)
 
     elem_choose_account = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div/div/div[1]/section/form/div[2]/div/div[2]/input')
+        '/html/body/main/div/div[2]/div/div/div[1]/section/form/div[2]/div/div[2]/input')
     elem_choose_account.click()
     sleep(3)
 
