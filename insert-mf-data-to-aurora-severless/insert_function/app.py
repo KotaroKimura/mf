@@ -12,6 +12,14 @@ def lambda_handler(event, context):
     print('START EVENT')
     params = parameter.get(event)
 
+    print('GET PENSION DATA FROM MF')
+    driver       = mf_scraping.login(params['mf-email'], params['mf-password'])
+    driver       = mf_scraping.sync_finance_info(driver)
+    pension_list = mf_scraping.dc_pension_list(driver)
+
+    driver.close()
+    driver.quit()
+
     print('TOUCH AURORA SERVERLESS')
     try:
         aurora_serverless.execute(
@@ -21,14 +29,6 @@ def lambda_handler(event, context):
     except aurora_serverless.bad_request_exception_class() as e:
         print('catch BadRequestException:', e)
         sleep(60)
-
-    print('GET PENSION DATA FROM MF')
-    driver       = mf_scraping.login(params['mf-email'], params['mf-password'])
-    driver       = mf_scraping.sync_finance_info(driver)
-    pension_list = mf_scraping.dc_pension_list(driver)
-
-    driver.close()
-    driver.quit()
 
     print('INSERT PENSION DATA TO AURORA SERVERLESS')
     values_list   = []
