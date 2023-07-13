@@ -50,7 +50,7 @@ def login(email, password):
     sleep(3)
 
     elem_choose_account = driver.find_element_by_xpath(
-        '/html/body/main/div/div[2]/div/div/div[1]/section/form/div[2]/div/div[2]/input')
+        '/html/body/main/div/div[2]/div/div/div[1]/section/form/div[2]/div/div[2]/button')
     elem_choose_account.click()
     sleep(3)
 
