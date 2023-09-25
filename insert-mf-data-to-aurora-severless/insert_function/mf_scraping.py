@@ -5,7 +5,8 @@ import os
 
 CHROME_DRIVER_PATH     = "/opt/chrome/chromedriver"
 HEADLESS_CHROMIUM_PATH = "/opt/chrome/headless-chromium"
-URL                    = "https://id.moneyforward.com/sign_in/email"
+ID_LOGIN_URL           = "https://id.moneyforward.com/sign_in"
+LOGIN_URL              = "https://moneyforward.com/sign_in"
 
 def login(email, password):
 
@@ -24,35 +25,32 @@ def login(email, password):
         chrome_options = options)
 
     driver.implicitly_wait(10)
-    driver.get(URL)
+    driver.get(ID_LOGIN_URL)
 
-    elem_loginMethod = driver.find_element_by_xpath(
+    elem_idLoginMethod = driver.find_element_by_xpath(
         '/html/body/main/div/div/div[2]/div/section/div/form/div/div/input')
-    elem_loginMethod.send_keys(email)
+    elem_idLoginMethod.send_keys(email)
 
-    elem_login = driver.find_element_by_xpath(
+    elem_IdLogin = driver.find_element_by_xpath(
         '/html/body/main/div/div/div[2]/div/section/div/form/div/button')
-    elem_login.click()
+    elem_IdLogin.click()
     sleep(3)
 
     elem_password = driver.find_element_by_xpath(
         '/html/body/main/div/div/div[2]/div/section/div/form/div/div[2]/input')
     elem_password.send_keys(password)
 
-    elem_login = driver.find_element_by_xpath(
+    elem_IdLogin = driver.find_element_by_xpath(
         '/html/body/main/div/div/div[2]/div/section/div/form/div/button')
-    elem_login.click()
+    elem_IdLogin.click()
     sleep(3)
+
+    driver.get(LOGIN_URL)
 
     elem_auth = driver.find_element_by_xpath(
-        '/html/body/main/div/div[2]/div/div[1]/div/ul/li[3]/a')
-    elem_auth.click()
-    sleep(3)
-
-    elem_choose_account = driver.find_element_by_xpath(
         '/html/body/main/div/div/div[2]/div/section/div/form/div/button')
-    elem_choose_account.click()
-    sleep(3)
+    elem_auth.click()
+    sleep(10)
 
     return driver
 
