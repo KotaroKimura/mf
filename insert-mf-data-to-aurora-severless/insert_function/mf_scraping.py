@@ -48,7 +48,7 @@ def login(email, password):
     driver.get(LOGIN_URL)
 
     elem_auth = driver.find_element_by_xpath(
-        '/html/body/main/div/div/div[2]/div/section/div/form/div/button')
+        '/html/body/main/div/div/div[2]/div/section/div/div/form/button')
     elem_auth.click()
     sleep(10)
 
