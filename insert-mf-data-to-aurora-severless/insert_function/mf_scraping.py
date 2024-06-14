@@ -96,26 +96,30 @@ def financial_instrument_list(driver):
     _result = []
     driver.get("https://moneyforward.com/bs/portfolio")
 
-    _portfolio_section = driver.find_elements_by_css_selector(".table.table-bordered.table-mf")[0]
-    _theader = _portfolio_section.find_element_by_tag_name("thead").find_elements_by_tag_name("th")
-    _tbody   = _portfolio_section.find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")
-    _header  = [t.text for t in _theader]
+    for _portfolio_section in [
+        driver.find_elements_by_css_selector(".table.table-bordered.table-mf")[0],
+        driver.find_elements_by_css_selector(".table.table-bordered.table-eq")[0],
+    ]:
+        _theader = _portfolio_section.find_element_by_tag_name("thead").find_elements_by_tag_name("th")
+        _tbody   = _portfolio_section.find_element_by_tag_name("tbody").find_elements_by_tag_name("tr")
+        _header  = [t.text for t in _theader]
 
-    for _item in [ { _header[_i]: _content.text for _i, _content in enumerate(_t.find_elements_by_tag_name("td"))} for _t in _tbody]:
-        if not _item['銘柄名'] in []:
-            _brand_info = []
+        for _item in [ { _header[_i]: _content.text for _i, _content in enumerate(_t.find_elements_by_tag_name("td"))} for _t in _tbody]:
+            if not _item['銘柄名'] in []:
+                _brand_info = []
 
-            _brand_info.append(_item['銘柄名'])
-            _brand_info.append(int(_item['保有数'].replace(",", "") or "0"))
-            _brand_info.append(int(_item['平均取得単価'].replace(",", "") or "0"))
-            _brand_info.append(int(_item['基準価額'].replace(",", "") or "0"))
-            _brand_info.append(int(_item['評価額'].replace(",", "").replace("円", "") or "0"))
-            _brand_info.append(int(_item['前日比'].replace(",", "").replace("円", "") or "0"))
-            _brand_info.append(int(_item['評価損益'].replace(",", "").replace("円", "") or "0"))
-            _brand_info.append(float(_item['評価損益率'].replace("%", "") or "0"))
-            _brand_info.append(_item['保有金融機関'])
+                _brand_info.append(_item['銘柄名'])
+                _brand_info.append('株式（現物）' if _item.get('銘柄コード') else '投資信託')
+                _brand_info.append(int(_item['保有数'].replace(",", "") or "0"))
+                _brand_info.append(int(_item['平均取得単価'].replace(",", "") or "0"))
+                _brand_info.append(int((_item.get('現在値') or _item['基準価額']).replace(",", "") or "0"))
+                _brand_info.append(int(_item['評価額'].replace(",", "").replace("円", "") or "0"))
+                _brand_info.append(int(_item['前日比'].replace(",", "").replace("円", "") or "0"))
+                _brand_info.append(int(_item['評価損益'].replace(",", "").replace("円", "") or "0"))
+                _brand_info.append(float(_item['評価損益率'].replace("%", "") or "0"))
+                _brand_info.append(_item['保有金融機関'])
 
-            _result.append(_brand_info)
+                _result.append(_brand_info)
 
     driver.refresh()
 

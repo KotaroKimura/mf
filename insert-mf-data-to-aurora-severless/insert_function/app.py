@@ -109,7 +109,6 @@ def lambda_handler(event, context):
         values_list.append(
             '({}, "{}", {}, {}, {}, {}, {}, {}, {}, "{}", "{}")'.format(
                 id,
-                '投資信託',
                 i[1],
                 i[2],
                 i[3],
@@ -118,6 +117,7 @@ def lambda_handler(event, context):
                 i[6],
                 i[7],
                 i[8],
+                i[9],
                 formated_date))
 
     if len(values_list) == 0:
