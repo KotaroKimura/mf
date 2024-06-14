@@ -24,7 +24,7 @@ def get_access_ranking():
     driver.get(URL)
 
     access_ranking_list = driver.find_elements_by_xpath(
-        '/html/body/div[7]/div/div/div/div[3]/div[1]/ul/li')
+        '/html/body/div[8]/div/div/div/div[3]/div[1]/ul/li')
 
     count   = 1
     results = []
